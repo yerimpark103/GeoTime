@@ -1,0 +1,50 @@
+<!doctype html>
+<!-- Declares geotime as the starting Angular module -->
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>Geographic Timeline</title>
+    <meta name="description" content="GeoTime Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="style.css"/>
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrn605l7RPadiwdzsOlRw9O28lxfYBJ6s"></script>
+    <!-- Modernizr -->
+    <script src="../bower_components/modernizr/bin/modernizr"></script>
+    <!-- JS Source -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+    <!-- Angular Source -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+
+
+</head>
+
+<body ng-app="geotime">
+  <nav>
+      <a href="#/firstview" class="bigmenu">Geographic Timeline Project</a>
+      &nbsp;
+      <span class="menu">
+        <a href="#/login" id="login">Log In</a>
+      |
+        <a href="#/about" id="about">About</a>
+      |
+        <a href="#/mapping" id="mapping">Mapping</a>
+      |
+        <a href="#/visuals" id="visuals">Visuals</a>
+      </span>
+  </nav>
+  <br /><br />
+  <div class="container">
+    <div ng-view></div>
+  </div>
+
+</body>
+</html>

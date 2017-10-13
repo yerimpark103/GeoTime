@@ -1,0 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700);
+body{
+  font-family: 'Inconsolata';
+  font-weight: 400;
+}
+.container{
+
+}
+a{
+  font-family: 'Inconsolata';
+  color: black;
+  text-decoration: none;
+}
+nav{
+  padding-top: 20px;
+}
+.bigmenu{
+  font-size: 30px;
+  padding-left: 3%;
+}
+.menu{
+  float: right;
+  padding-top: 10px;
+  padding-right: 3%;
+}
+nav a{
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
+}
+nav a:hover{
+  color: #82909D;
+  text-decoration: none;
+}
+/* Google Map! */
+#map {
+    height: 45vh;
+    width: 48vw;
+    min-width: 400px;
+    max-width: 650px;
+}
+.frame{
+  text-align: center;
+  max-width: 80vw;
+  max-height: 80vh;
+  text-align: center;
+}
+.slides{
+  display:none;
+  animation:fading 10s infinite;
+}
