@@ -32,6 +32,7 @@ geotimeServices.factory('gservice', function($rootScope, $http){
 
             // Clears the holding array of locations
             locations = [];
+            lastNames = [];
 
             // Set the selected lat and long equal to the ones provided on the refresh() call
             selectedLat = latitude;
@@ -42,9 +43,11 @@ geotimeServices.factory('gservice', function($rootScope, $http){
 
                 // Convert the results into Google Map Format
                 locations = convertToMapPoints(response);
-
+                lastNames = lastNamePicker(response);
                 // Then initialize the map.
                 initialize(latitude, longitude);
+                console.log(lastNames);
+
             }).error(function(){});
         };
 
@@ -55,7 +58,6 @@ geotimeServices.factory('gservice', function($rootScope, $http){
 
             // Clear the locations holder
             var locations = [];
-
             // Loop through all of the JSON entries provided in the response
             for(var i= 0; i < response.length; i++) {
                 var user = response[i];
@@ -84,7 +86,29 @@ geotimeServices.factory('gservice', function($rootScope, $http){
         // location is now an array populated with records in Google Maps format
         return locations;
     };
+        var lastNamePicker = function(response){
 
+            var lastNames = [];
+            // Loop through all of the JSON entries provided in the response
+            for(var i= 0; i < response.length; i++) {
+                var user = response[i];
+
+                // Create popup windows for each record
+                var  contentString =
+                    '<p><b>firstName</b>: ' + user.firstName +
+                    '<p><b>lastName</b>: ' + user.lastName +
+                    '<br><b>Date</b>: ' + user.date +
+                    '<br><b>address</b>: ' + user.address +
+                    '</p>';
+
+                // Converts each of the JSON records into Google Maps Location format (Note [Lat, Lng] format).
+                lastNames.push({
+                    lastName: user.lastName
+            });
+        }
+        // location is now an array populated with records in Google Maps format
+        return lastNames;
+    };
 // Initializes the map
 var initialize = function(latitude, longitude) {
 
