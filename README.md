@@ -1,5 +1,5 @@
 # Geographic Timeline
-::Web Application for 3D Visualization using Reverse Geotagging via Google Maps API ::
+:: Web Application for 3D Visualization using Reverse Geotagging via Google Maps API ::
 
 How to install on local device
 1. download "npm" and "nodejs" on your device (https://www.npmjs.com/get-npm)
