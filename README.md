@@ -1,5 +1,4 @@
-# GeoTime
-Geographic Timeline Project 
+# Geographic Timeline
 ::Web Application for 3D Visualization using Reverse Geotagging via Google Maps API ::
 
 How to install on local device
