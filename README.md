@@ -2,6 +2,7 @@
 :: Web Application for 3D Visualization using Reverse Geotagging via Google Maps API ::
 
 How to install on local device
+
 0. delete your current Geotime folder in your \Code folder
 1. pull up git cmd 
 2. using git cmd, go to folder (using "cd Documents\Projects\Geographic Timelines\Code") you want the program to be downloaded into
