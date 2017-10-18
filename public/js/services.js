@@ -12,6 +12,8 @@ geotimeServices.factory('gservice', function($rootScope, $http){
 
         // Array of locations obtained from API calls
         var locations = [];
+        // Array of last Names
+        var lastNames = [];
 
         // Variables we'll use to help us pan to the right spot
         var lastMarker;
@@ -43,10 +45,10 @@ geotimeServices.factory('gservice', function($rootScope, $http){
 
                 // Convert the results into Google Map Format
                 locations = convertToMapPoints(response);
-                lastNames = lastNamePicker(response);
+                //lastNames = lastNamePicker(response);
                 // Then initialize the map.
                 initialize(latitude, longitude);
-                console.log(lastNames);
+                //console.log(lastNames);
 
             }).error(function(){});
         };
@@ -86,29 +88,30 @@ geotimeServices.factory('gservice', function($rootScope, $http){
         // location is now an array populated with records in Google Maps format
         return locations;
     };
-        var lastNamePicker = function(response){
-
-            var lastNames = [];
-            // Loop through all of the JSON entries provided in the response
-            for(var i= 0; i < response.length; i++) {
-                var user = response[i];
-
-                // Create popup windows for each record
-                var  contentString =
-                    '<p><b>firstName</b>: ' + user.firstName +
-                    '<p><b>lastName</b>: ' + user.lastName +
-                    '<br><b>Date</b>: ' + user.date +
-                    '<br><b>address</b>: ' + user.address +
-                    '</p>';
-
-                // Converts each of the JSON records into Google Maps Location format (Note [Lat, Lng] format).
-                lastNames.push({
-                    lastName: user.lastName
-            });
-        }
-        // location is now an array populated with records in Google Maps format
-        return lastNames;
-    };
+    //     var lastNamePicker = function(response){
+    //
+    //         var lastNames = [];
+    //         // Loop through all of the JSON entries provided in the response
+    //         for(var i= 0; i < response.length; i++) {
+    //             var user = response[i];
+    //
+    //             // Create popup windows for each record
+    //             var  contentString =
+    //                 '<p><b>firstName</b>: ' + user.firstName +
+    //                 '<p><b>lastName</b>: ' + user.lastName +
+    //                 '<br><b>Date</b>: ' + user.date +
+    //                 '<br><b>address</b>: ' + user.address +
+    //                 '</p>';
+    //
+    //             // Converts each of the JSON records into Google Maps Location format (Note [Lat, Lng] format).
+    //             lastNames.push({
+    //                 lastName: user.lastName
+    //         });
+    //     }
+    //     // location is now an array populated with records in Google Maps format
+    //     console.log(lastNames);
+    //     return lastNames;
+    // };
 // Initializes the map
 var initialize = function(latitude, longitude) {
 

@@ -55,12 +55,20 @@
                          <div class="col-md-12"><br /></div>
                          <label>
                            Assigned User
-                           <select ng-model="assignedUser">
+                           <!-- <select ng-model="assignedUser">
                              <div ng-repeat="location in locations" value="{{user._id}}">
                                {{location.lastName}}
                              </div>
-                           </select>
+                           </select> -->
+                           <input type="search" ng-model="search.stri" placeholder="Search" />
                          </label>
+                         <div class="col-md-12">
+                           <div ng-repeat="user in users | filter:search.stri">
+                             <p>
+                              {{user.firstName}} {{user.lastName}}
+                             </p>
+                           </div>
+                         </div>
                         <button type="submit" class="btn btn-danger col-md-12" ng-click="createUser()" >Create User</button>
                         <div class="col-md-12"><br /></div>
                           <div class="col-md-12" id="createUserSuccess">

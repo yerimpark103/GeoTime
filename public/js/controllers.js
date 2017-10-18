@@ -4,6 +4,11 @@ var geotimeControllers = angular.module('geotimeControllers',[]);
 geotimeControllers.controller('addCtrl', ['$scope', '$http', '$rootScope', 'geolocation', 'gservice', function($scope, $http, $rootScope, geolocation, gservice){
 //var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
 //addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, gservice){
+    $http.get('/users').success(function(data){
+      console.log(data);
+      $scope.users = data;
+    });
+
     $("createUserSuccess").show();
     // Initializes Variables
     // ----------------------------------------------------------------------------
