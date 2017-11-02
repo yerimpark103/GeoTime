@@ -4,6 +4,22 @@
         <!-- Google Map -->
         <div class="col-md-7">
             <div id="map"></div>
+            <label>
+              Assigned User
+              <!-- <select ng-model="assignedUser">
+                <div ng-repeat="location in locations" value="{{user._id}}">
+                  {{location.lastName}}
+                </div>
+              </select> -->
+              <input type="search" ng-model="search.stri" placeholder="Search" />
+            </label>
+            <div class="col-md-12">
+              <div ng-repeat="user in users | filter:search.stri">
+                <p>
+                 {{user.firstName}} {{user.lastName}}
+                </p>
+              </div>
+            </div>
         </div>
         <!-- Side Panel -->
         <div class="col-md-4">
@@ -53,22 +69,7 @@
                         <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
                          <button type="submit" class="btn btn-warning col-md-12" ng-click="createMap()" >Add Another Point</button>
                          <div class="col-md-12"><br /></div>
-                         <label>
-                           Assigned User
-                           <!-- <select ng-model="assignedUser">
-                             <div ng-repeat="location in locations" value="{{user._id}}">
-                               {{location.lastName}}
-                             </div>
-                           </select> -->
-                           <input type="search" ng-model="search.stri" placeholder="Search" />
-                         </label>
-                         <div class="col-md-12">
-                           <div ng-repeat="user in users | filter:search.stri">
-                             <p>
-                              {{user.firstName}} {{user.lastName}}
-                             </p>
-                           </div>
-                         </div>
+
                         <button type="submit" class="btn btn-danger col-md-12" ng-click="createUser()" >Create User</button>
                         <div class="col-md-12"><br /></div>
                           <div class="col-md-12" id="createUserSuccess">
