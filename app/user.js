@@ -10,7 +10,7 @@ var UserSchema = new Schema({
   date: {type: Date, required: true},
   address: {type: String, required: true},
   location: {type: [Number], required: true}, // [Long, Lat]
-
+  assignedGroup : {type: String},
 //  htmlverified: String,
   created_at: {type: Date, default: Date.now},
   updated_at: {type: Date, default: Date.now}

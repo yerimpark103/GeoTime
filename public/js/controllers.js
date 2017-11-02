@@ -6,8 +6,11 @@ geotimeControllers.controller('addCtrl', ['$scope', '$http', '$rootScope', 'geol
 //addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, gservice){
     $http.get('/users').success(function(data){
       console.log(data);
+      console.log("get users");
       $scope.users = data;
     });
+
+
 
     $("createUserSuccess").show();
     // Initializes Variables
@@ -39,6 +42,12 @@ geotimeControllers.controller('addCtrl', ['$scope', '$http', '$rootScope', 'geol
 
     // Functions
     // ----------------------------------------------------------------------------
+    //Refreshes
+    $scope.refreshUsers = function(){
+      $http.get('/users').success(function(data){
+          $scope.users = data;
+        });
+      };
     // Get coordinates based on mouse click. When a click event is detected....
     $rootScope.$on("clicked", function(){
 
@@ -60,6 +69,7 @@ geotimeControllers.controller('addCtrl', ['$scope', '$http', '$rootScope', 'geol
             date: $scope.formData.date,
             address: $scope.formData.address,
             location: [$scope.formData.longitude, $scope.formData.latitude],
+            assignedGroup : $scope.formData.assignedGroup,
             htmlverified: $scope.formData.htmlverified
         };
 
@@ -75,13 +85,45 @@ geotimeControllers.controller('addCtrl', ['$scope', '$http', '$rootScope', 'geol
 
                 // Refresh the map with new data
                 gservice.refresh($scope.formData.latitude, $scope.formData.longitude);
+                $scope.refreshUsers();
 
                 $("createUserSuccess").show();
-                $scope.displayText = "User "+ $scope.formData.firstName + " " + $scope.formData.lastName + " has been added";
+                $scope.displayText = "User "+ $scope.formData._id + " " + " has been added for group " + $scope.formData.assignedGroup;
+                var myGroup = $scope.formData.assignedGroup;
+                myGroup.maps.push($scope.formData._id);
+                console.log("Added map id is "+ $scope.formData._id);
+                $http.put('/logins'+  $scope.formData.assignedGroup._id);
             })
             .error(function (data) {
                 console.log('Error: ' + data);
             });
+    };
+
+    // $http.get('/users/'+_id).success(function(data){
+    //   console.log(data);
+    //   console.log("get userid");
+    // });
+
+    //Removes one data
+    $scope.removeOne = function(_id){
+      $http({
+          url: '/users/' + _id,
+          method: 'GET',
+          params: {_id : _id}
+        });
+      var index = -1;
+      var userArr = eval($scope.users);
+      for (var i = 0; i < userArr.length; i++){
+        if (userArr[i]._id === _id){
+          index = i;
+          break;
+        }
+      }
+      if (index === -1){
+        alert("something is wrong");
+      }
+      $scope.users.splice(index,1);
+      $http.delete('/users/' + _id);
     };
 
     $scope.createMap = function() {
@@ -92,4 +134,54 @@ geotimeControllers.controller('addCtrl', ['$scope', '$http', '$rootScope', 'geol
         if (err) return handleError(err);
       });
     };
+    $http.get('/logins').success(function(data){
+        $scope.logins = data;
+      });
+}]);
+
+geotimeControllers.controller('loginCtrl', ['$scope', '$http', '$rootScope', 'geolocation', 'gservice', function($scope, $http, $rootScope, geolocation, gservice){
+  $http.get('/logins').success(function(data){
+    console.log(data);
+    console.log("get logins");
+    $scope.logins = data;
+  });
+
+  $("createLoginSuccess").show();
+  // Initializes Variables
+  // ----------------------------------------------------------------------------
+  $scope.formData = {};
+  // Set initial coordinates to the center of the US
+
+  // Functions
+  // ----------------------------------------------------------------------------
+  //Refreshes
+  $scope.refreshLogins = function(){
+    $http.get('/logins').success(function(data){
+        $scope.logins = data;
+      });
+    };
+  // Creates a new login based on the form fields
+  $scope.createLogin = function() {
+
+      // Grabs all of the text box fields
+      var loginData = {
+          group: $scope.formData.group
+      };
+
+      // Saves the login data to the db
+      $http.post('/logins', loginData)
+          .success(function (data) {
+              $scope.formData.group = "";
+
+              // // Refresh the map with new data
+              gservice.getLogins();
+              $scope.refreshLogins();
+
+              $("createLoginSuccess").show();
+              $scope.displayText1 = "Login "+ $scope.formData.group + " has been added";
+          })
+          .error(function (data) {
+              console.log('Error: ' + data);
+          });
+  };
 }]);

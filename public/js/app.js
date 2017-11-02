@@ -23,8 +23,8 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, locat
   }).
 
   when('/login', {
-      controller: '',
-      templateUrl: ''
+      controller: 'loginCtrl',
+      templateUrl: 'partials/login.html'
   }).
   /*
   when('/details/:id', {

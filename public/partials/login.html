@@ -1,0 +1,13 @@
+<div class="form-group col-md-12" style="padding-left:0;">
+    <label for="group">Group Name</label><span style="color:red;"> *</span>
+    <input type="text" class="form-control" id="group" placeholder="Family" ng-model="formData.group" required>
+    <br />
+    <button type="submit" class="btn col-md-12" ng-click="createLogin()" >Make your group!</button>
+</div>
+<div class="col-md-12" id="createLoginSuccess">
+  <p>
+    Your Login Data:<br />
+    {{formData.group}}
+  </p>
+  <h5 ng-bind="displayText1"></h5>
+</div>

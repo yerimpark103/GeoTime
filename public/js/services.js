@@ -2,6 +2,7 @@
 var geotimeServices = angular.module('geotimeServices', []);
 
 geotimeServices.factory('gservice', function($rootScope, $http){
+
 //angular.module('gservice', [])
     //.factory('gservice', function($rootScope, $http){
 
@@ -187,6 +188,33 @@ var initialize = function(latitude, longitude) {
 // Refresh the page upon window load. Use the initial latitude and longitude
 google.maps.event.addDomListener(window, 'load',
     googleMapService.refresh(selectedLat, selectedLong));
+
+  var getLogins = function(response){
+    logins = [];
+    $http.get('/logins').success(function(response){
+        logins = convertToLogins(response);
+    }).error(function(){});
+    var convertToLogins = function(response){
+        // Clear the logins holder
+        var logins = [];
+        // Loop through all of the JSON entries provided in the response
+        for(var i= 0; i < response.length; i++) {
+            var login = response[i];
+
+            // Create popup windows for each record
+            var  contentString =
+                '<p><b>group</b>: ' + login.group +
+                '</p>';
+
+            // Converts each of the JSON records into Google Maps Location format (Note [Lat, Lng] format).
+            logins.push({
+                group: login.group
+            });
+        }
+    };
+    // location is now an array populated with records in Google Maps format
+    return logins;
+  };
 
 return googleMapService;
 });

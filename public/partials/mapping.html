@@ -4,8 +4,9 @@
         <!-- Google Map -->
         <div class="col-md-7">
             <div id="map"></div>
+            <br />
             <label>
-              Assigned User
+              Find User
               <!-- <select ng-model="assignedUser">
                 <div ng-repeat="location in locations" value="{{user._id}}">
                   {{location.lastName}}
@@ -16,8 +17,11 @@
             <div class="col-md-12">
               <div ng-repeat="user in users | filter:search.stri">
                 <p>
-                 {{user.firstName}} {{user.lastName}}
-                </p>
+                <span>
+                 {{user.firstName}} {{user.lastName}} {{user._id}}
+                <input type="button" value="Remove" ng-click="removeOne(user._id)"/>
+              </span>
+              </p>
               </div>
             </div>
         </div>
@@ -67,9 +71,13 @@
                           <h5 ng-bind="displayText"></h5>
                         </div-->
                         <!-- Submit button. Note that its tied to createUser() function from addCtrl. Also note ng-disabled logic which prevents early submits.  -->
-                         <button type="submit" class="btn btn-warning col-md-12" ng-click="createMap()" >Add Another Point</button>
-                         <div class="col-md-12"><br /></div>
-
+                         <label>Assigned group
+                         <select class="form-group col-md-12" ng-model="formData.assignedGroup">
+                          <option ng-repeat="login in logins" value="{{login._id}}">
+                            {{login.group}}
+                          </option>
+                         </select>
+                        </label>
                         <button type="submit" class="btn btn-danger col-md-12" ng-click="createUser()" >Create User</button>
                         <div class="col-md-12"><br /></div>
                           <div class="col-md-12" id="createUserSuccess">
@@ -79,7 +87,6 @@
                             </p>
                             <h5 ng-bind="displayText"></h5>
                           </div>
-
                     </form>
                 </div>
             </div>
