@@ -198,6 +198,9 @@ geotimeControllers.controller('visualsCtrl', ['$scope', '$http', '$rootScope', '
       myX.push(data[i].location[0]); //lat
       myY.push(data[i].location[1]); //lon
       var parsedDate = (new Date(data[i].date).getFullYear());
+      /*TODO :: make Chronological sequence
+      Once you set a point, make a fake point with same x,y: z will follow the next input's z val
+      Multiple users + Groups*/
       myZ.push(parsedDate);
     }
   });
@@ -211,7 +214,7 @@ geotimeControllers.controller('visualsCtrl', ['$scope', '$http', '$rootScope', '
       y: myY,
       z: myZ,
       line: {
-        color: '#00AEEF',
+        color: '#FDB813', //'#00AEEF',
         width: 3
       },
       //mode: 'lines',
@@ -403,7 +406,7 @@ geotimeControllers.controller('visualsCtrl', ['$scope', '$http', '$rootScope', '
       autosize: true,
       height: 800,
       scene: {cameraposition: [
-          [0.179009801309, 0.484305194501, 0.848821039475, -0.113608153579], [0, 0, 0], 2.165063509]},
+          [0.179009801309, -0.484305194501, 0.848821039475, -0.113608153579], [0, 0, 0], 2.565063509]},
       showlegend: true,
       width: 800,
       xaxis: {
