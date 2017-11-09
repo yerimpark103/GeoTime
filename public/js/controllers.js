@@ -190,8 +190,9 @@ geotimeControllers.controller('visualsCtrl', ['$scope', '$http', '$rootScope', '
    myX = [];
    myY = [];
    myZ = [];
-  $http.get('/users').success(function(data){
+  $http.get('/users').success(function(data){ //, {params:{lastName : "Cartwright"}}
     $scope.users = data;
+    console.log(data);
     var i = 0;
     for (i; i < data.length; i++){
       myX.push(data[i].location[0]); //lat
@@ -200,7 +201,7 @@ geotimeControllers.controller('visualsCtrl', ['$scope', '$http', '$rootScope', '
       myZ.push(parsedDate);
     }
   });
-  setTimeout(visualizeMe, 1000); //need time to retreive data
+  setTimeout(visualizeMe, 100); //need time to retreive data
   function visualizeMe(){
     console.log("x",myX);
     console.log("y",myY);
@@ -397,14 +398,14 @@ geotimeControllers.controller('visualsCtrl', ['$scope', '$http', '$rootScope', '
       type: 'scatter3d'
     };
 
-    data = [trace1, trace2];
+    data = [trace1];
     layout = {
       autosize: true,
-      height: 1000,
+      height: 800,
       scene: {cameraposition: [
           [0.179009801309, 0.484305194501, 0.848821039475, -0.113608153579], [0, 0, 0], 2.165063509]},
       showlegend: true,
-      width: 1000,
+      width: 800,
       xaxis: {
         title: 'Lat',
         type: 'linear'
