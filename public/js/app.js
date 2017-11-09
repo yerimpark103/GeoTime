@@ -12,19 +12,17 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, locat
     templateUrl: 'partials/firstview.html',
     controller: ''
   }).
-
   when('/about', {
     templateUrl: 'partials/about.html',
     controller: ''
   }).
   when('/visuals', {
     templateUrl: 'partials/visuals.html',
-    controller: ''
+    controller: 'visualsCtrl'
   }).
-
   when('/login', {
-      controller: 'loginCtrl',
-      templateUrl: 'partials/login.html'
+      templateUrl: 'partials/login.html',
+      controller: 'loginCtrl'
   }).
   /*
   when('/details/:id', {

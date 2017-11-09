@@ -1,6 +1,11 @@
-<div id="plotly-div" style="width:80vw;height:80vh;"></div>
+<div ng-repeat="user in users" value="{{user._id}}">
+  {{user.location}}{{user.date}}
+</div>
 
-<script>
+PLEASE WAIT ONE SEC
+<div class="col-md-12" id="plotly-div" style="width:40vw;height:40vh;"></div>
+
+<!--<script>
 trace1 = {
   x: [39.925,
 			38.34972222,
@@ -275,4 +280,4 @@ Plotly.plot('plotly-div', {
   data: data,
   layout: layout
 });
-</script>
+</script> -->
