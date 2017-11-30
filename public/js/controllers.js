@@ -193,15 +193,31 @@ geotimeControllers.controller('visualsCtrl', ['$scope', '$http', '$rootScope', '
   $http.get('/users').success(function(data){ //, {params:{lastName : "Cartwright"}}
     $scope.users = data;
     console.log(data);
+    /*Sort data based on date*/
+    data.sort(function(a,b){
+      var c = new Date(a.date);
+      var d = new Date(b.date);
+      return c-d;
+    });
     var i = 0;
     for (i; i < data.length; i++){
       myX.push(data[i].location[0]); //lat
+      myX.push(data[i].location[0]);
       myY.push(data[i].location[1]); //lon
+      myY.push(data[i].location[1]);
       var parsedDate = (new Date(data[i].date).getFullYear());
+      myZ.push(parsedDate);
+      if (i == data.length - 1){
+        var dummyDate = (new Date(data[i].date).getFullYear());
+        myZ.push(dummyDate);
+      }
+      else{
+        var dummyDate = (new Date(data[i+1].date).getFullYear());
+        myZ.push(dummyDate);
+      }
       /*TODO :: make Chronological sequence
       Once you set a point, make a fake point with same x,y: z will follow the next input's z val
       Multiple users + Groups*/
-      myZ.push(parsedDate);
     }
   });
   setTimeout(visualizeMe, 100); //need time to retreive data
@@ -288,116 +304,6 @@ geotimeControllers.controller('visualsCtrl', ['$scope', '$http', '$rootScope', '
       },
       //mode: 'lines',
       name: '2015-01-14 11:04:09',
-      type: 'scatter3d'
-    };
-
-    trace3 = {
-      x: [52.44944444,
-          2.803333333,
-          52.81888889,
-          52.81888889,
-          52.44944444,
-          53.05666667,
-          52.75,
-          53.16527778,
-          50,
-          38.15,
-          38.15,
-          38.55888889,
-          38.15,
-          38.55888889,
-          38.15,
-          38.15,
-          38.33333333,
-          39.925,
-          35.88722222,
-          40.16611111],
-      y: [1.166666667,
-          -2.803333333,
-          -1.055277778,
-          -1.055277778,
-          1.166666667,
-          -0.9588888889,
-          -1.25,
-          -0.8741666667,
-          -1,
-          -76.42583333,
-          -76.42583333,
-          -76.9275,
-          -76.42583333,
-          -76.9275,
-          -76.42583333,
-          -76.42583333,
-          -76.13333333,
-          -85.36666667,
-          -79.85833333,
-          -84.80333333],
-      z: [1467,
-          1501,
-          1469,
-          1556,
-          1491,
-          1556,
-          1567,
-          1632,
-          1655,
-          1737,
-          1663,
-          1698,
-          1673,
-          1739,
-          1690,
-          1747,
-          1774,
-          1849,
-          1777,
-          1853],
-      line: {
-        color: '#FF0000',
-        width: 3
-      },
-      //mode: 'lines',
-      name: '2015-01-14 12:26:08',
-      type: 'scatter3d'
-    };
-
-    trace4 = {
-      x: [35.88722222,
-          39.925,
-          38.33333333,
-          40.16611111,
-          39,
-          38,
-          37,
-          36,
-          35,
-          34],
-      y: [-79.85833333,
-          -85.36666667,
-          -76.13333333,
-          -84.80333333,
-          -90,
-          -95,
-          -97,
-          -105,
-          -115,
-          -120],
-      z: [1803,
-          1854,
-          1751,
-          1823,
-          1900,
-          1910,
-          1930,
-          1935,
-          1936,
-          2000],
-      line: {
-        color: '#473025',
-        width: 3
-      },
-      //mode: 'lines',
-      name: '2015-01-14 12:46:46',
       type: 'scatter3d'
     };
 
