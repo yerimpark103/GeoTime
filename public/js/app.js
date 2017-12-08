@@ -21,8 +21,12 @@ app.config(['$routeProvider','$locationProvider', function($routeProvider, locat
     controller: 'visualsCtrl'
   }).
   when('/login', {
-      templateUrl: 'partials/login.html',
-      controller: 'loginCtrl'
+    templateUrl: 'partials/login.html',
+    controller: 'loginCtrl'
+  }).
+  when('/temp',{
+    templateUrl: 'partials/temp.html',
+    controller: 'tempCtrl'
   }).
   /*
   when('/details/:id', {

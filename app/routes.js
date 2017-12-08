@@ -13,15 +13,27 @@ module.exports = function(app) {
     app.get('/users', function(req, res){
 
         // Uses Mongoose schema to run the search (empty conditions)
-        var query = User.find({});
-        query.exec(function(err, users){
-            if(err)
-                return res.send(err);
-
-            // If no errors are found, it responds with a JSON of all users
-            res.json(users);
-        });
+        // var query = User.find({});
+        // query.exec(function(err, users){
+        //     if(err)
+        //         return res.send(err);
+        //
+        //     // If no errors are found, it responds with a JSON of all users
+        //     res.json(users);
+        // });
+        User.find({}, function (err, users) {
+       if (err) return res.status(500).send("There was a problem finding the users.");
+       res.status(200).send(users);
+      });
     });
+
+    // app.get('/users/:id', function(req,res){
+    //   User.findById(req.params.id, function(err, user){
+    //     if (err) return res.status(500).send("There was a problem finding the user.");
+    //     if (!user) return res.status(404).send("No user found");
+    //     res.status(200).send(user);
+    //   });
+    // });
 
     // POST Routes
     // --------------------------------------------------------

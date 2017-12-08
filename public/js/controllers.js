@@ -88,6 +88,8 @@ geotimeControllers.controller('addCtrl', ['$scope', '$http', '$rootScope', 'geol
                 $scope.refreshUsers();
 
                 $("createUserSuccess").show();
+                var myMap = data.data;
+                console.log("My Map is ",myMap);
                 $scope.displayText = "User "+ $scope.formData._id + " " + " has been added for group " + $scope.formData.assignedGroup;
                 var myGroup = $scope.formData.assignedGroup;
                 myGroup.maps.push($scope.formData._id);
@@ -190,124 +192,123 @@ geotimeControllers.controller('visualsCtrl', ['$scope', '$http', '$rootScope', '
    myX = [];
    myY = [];
    myZ = [];
+   myX1 = [];
+   myY1 = [];
+   myZ1 = [];
+   myX2 = [];
+   myY2 = [];
+   myZ2 = [];
+   YP = [];
+   SC = [];
   $http.get('/users').success(function(data){ //, {params:{lastName : "Cartwright"}}
     $scope.users = data;
     console.log(data);
-    /*Sort data based on date*/
-    data.sort(function(a,b){
-      var c = new Date(a.date);
-      var d = new Date(b.date);
-      return c-d;
-    });
+
     var i = 0;
     for (i; i < data.length; i++){
-      myX.push(data[i].location[0]); //lat
-      myX.push(data[i].location[0]);
-      myY.push(data[i].location[1]); //lon
-      myY.push(data[i].location[1]);
-      var parsedDate = (new Date(data[i].date).getFullYear());
-      myZ.push(parsedDate);
-      if (i == data.length - 1){
-        var dummyDate = (new Date(data[i].date).getFullYear());
-        myZ.push(dummyDate);
+      if (data[i].assignedGroup === "5a1f81b750b406141b81956c"){
+        myX1.push(data[i].location[0]); //lat
+        myX1.push(data[i].location[0]);
+        myY1.push(data[i].location[1]); //lon
+        myY1.push(data[i].location[1]);
+        var parsedDate = (new Date(data[i].date).getFullYear());
+        myZ1.push(parsedDate);
+        if (i === data.length - 1){
+          var dummyDate = (new Date(data[i].date).getFullYear());
+          myZ1.push(dummyDate);
+        }
+        else{
+          var dummyDate = (new Date(data[i+1].date).getFullYear());
+          myZ1.push(dummyDate);
+        }
       }
-      else{
-        var dummyDate = (new Date(data[i+1].date).getFullYear());
-        myZ.push(dummyDate);
+      else if (data[i].assignedGroup === "5a1faa9b4309642c7a1f12f6"){
+        myX.push(data[i].location[0]); //lat
+        myX.push(data[i].location[0]);
+        myY.push(data[i].location[1]); //lon
+        myY.push(data[i].location[1]);
+        var parsedDate = (new Date(data[i].date).getFullYear());
+        myZ.push(parsedDate);
+        if (i === data.length - 1){
+          var dummyDate = (new Date(data[i].date).getFullYear());
+          myZ.push(dummyDate);
+        }
+        else{
+          var dummyDate = (new Date(data[i+1].date).getFullYear());
+          myZ.push(dummyDate);
+        }
       }
-      /*TODO :: make Chronological sequence
-      Once you set a point, make a fake point with same x,y: z will follow the next input's z val
-      Multiple users + Groups*/
+      else {
+        myX2.push(data[i].location[0]); //lat
+        myX2.push(data[i].location[0]);
+        myY2.push(data[i].location[1]); //lon
+        myY2.push(data[i].location[1]);
+        var parsedDate = (new Date(data[i].date).getFullYear());
+        myZ2.push(parsedDate);
+        if (i === data.length - 1){
+          var dummyDate = (new Date(data[i].date).getFullYear());
+          myZ2.push(dummyDate);
+        }
+        else{
+          var dummyDate = (new Date(data[i+1].date).getFullYear());
+          myZ2.push(dummyDate);
+        }
+      }
+
     }
+
   });
-  setTimeout(visualizeMe, 100); //need time to retreive data
+  setTimeout(visualizeMe, 1000); //need time to retreive data
   function visualizeMe(){
     console.log("x",myX);
     console.log("y",myY);
     console.log("z",myZ);
+    console.log("x1",myX1);
+    console.log("y1",myY1);
+    console.log("z1",myZ1);
     trace1 = {
       x: myX,
       y: myY,
       z: myZ,
       line: {
-        color: '#FDB813', //'#00AEEF',
-        width: 3
+        color: '#FDB813',
+        width: 5
       },
-      //mode: 'lines',
-      name: 'My Data',
+      mode: 'lines',
+      name: 'SC',
       type: 'scatter3d'
     };
     console.log(trace1);
     trace2 = {
-      x: [38.82222222,
-          38.15,
-          38.55888889,
-          51.45,
-          38.15,
-          52.75,
-          38.15,
-          53.16527778,
-          53.16527778,
-          51.52027778,
-          53.62944444,
-          53.16527778,
-          53.16527778,
-          53.16527778,
-          53.16527778,
-          53.16527778,
-          53.16527778,
-          52.75,
-          52.75,
-          52.44944444],
-      y: [-77.3089,
-          -76.4258,
-          -76.9275,
-          3.6500,
-          -76.4258,
-          -1.2500,
-          -76.4258,
-          -0.8742,
-          -0.8742,
-          -0.1306,
-          -2.737222222,
-          -0.8741666667,
-          -0.8741666667,
-          -0.8741666667,
-          -0.8741666667,
-          -0.8741666667,
-          -0.8741666667,
-          -1.25,
-          -1.25,
-          1.166666667],
-      z: [1772,
-          1687,
-          1751,
-          1634,
-          1687,
-          1590,
-          1646,
-          1560,
-          1593,
-          1535,
-          1559,
-          1505,
-          1554,
-          1485,
-          1556,
-          1465,
-          1550,
-          1482,
-          1556],
+      x: myX1,
+      y: myY1,
+      z: myZ1,
       line: {
-        color: '#FDB813',
-        width: 3
+        color: '#00AEEF',
+        width: 5
       },
-      //mode: 'lines',
-      name: '2015-01-14 11:04:09',
+      mode: 'lines',
+      name: 'YP',
+      type: 'scatter3d'
+    };
+    trace3 = {
+      x: myX2,
+      y: myY2,
+      z: myZ2,
+      line: {
+        color: '#CCAB29', //TODO : Change this color : Randomly Generate Hex code color
+        width: 5
+      },
+      mode: 'lines',
+      name: 'MISC',
       type: 'scatter3d'
     };
 
-    data = [trace1];
+    /*TODO: SCALING : 180/180 FIXED Square, keep the scaling
+            Year sorting is off
+            Have Schema -> Group -> (MAP3D) Select your group -> Shows group members' data in separate lines*/
+
+    data = [trace1, trace2, trace3];
     layout = {
       autosize: true,
       height: 800,
@@ -333,5 +334,22 @@ geotimeControllers.controller('visualsCtrl', ['$scope', '$http', '$rootScope', '
       layout: layout
     });
   }
+
+}]);
+
+geotimeControllers.controller('tempCtrl', ['$scope', '$http', '$rootScope', 'geolocation', 'gservice', function($scope, $http, $rootScope, geolocation, gservice){
+  $http.get('/users').success(function(data){
+    $scope.users = data;
+    console.log(data);
+    var i = 0;
+    result = [];
+    for (i; i < data.length; i++){
+      result.push(data[i].location);
+    }
+    console.log(result);
+  });
+  $http.get('/logins').success(function(data){
+    $scope.logins = data;
+  });
 
 }]);

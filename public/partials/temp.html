@@ -1,0 +1,19 @@
+Current groups
+<select class="form-group col-md-12">
+ <option ng-repeat="user in users" value="{{user.assignedGroup}}">
+   {{user.assignedGroup}}
+ </option>
+</select>
+ <a ng-model='searchGroup' ng-repeat="user in users" value="{{user.assignedGroup}}" ng-click="setGroup(group)">{{ user.assignedGroup }} <br /></a>
+ <div ng-show="searchGroup">
+
+ </div>
+ <div ng-repeat="user in users | filter:searchGroup">
+  {{user.firstName}} {{user.lastName}}
+ </div>
+
+ <select class="form-group col-md-12" ng-model="formData.assignedGroup">
+  <option ng-repeat="login in logins" value="{{login._id}}">
+    {{login.group}}
+  </option>
+ </select>
