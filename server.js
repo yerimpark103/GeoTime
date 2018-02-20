@@ -13,7 +13,7 @@ var app             = express();
 // -----------------------------------------------------
 // Sets the connection to MongoDB
 //mongoose.connect("mongodb://localhost/geotime");
-mongoose.connect('mongodb://yerimpark103:kise0103@ds149820.mlab.com:49820/datagarage');
+mongoose.connect('mongodb://yerimpark103:Geographic0-0@ds149820.mlab.com:49820/datagarage');
 var db = mongoose.connection;
 
 // Logging and Parsing
