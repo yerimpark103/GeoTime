@@ -14,5 +14,8 @@
     "modernizr": "^3.5.0",
     "mongoose": "~4.1.0",
     "morgan": "~1.2.2"
+  },
+  "devDependencies": {
+    "deploy-to-git": "^0.1.5"
   }
 }

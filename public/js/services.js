@@ -2,18 +2,9 @@
 var geotimeServices = angular.module('geotimeServices', []);
 
 geotimeServices.factory('gservice', function($rootScope, $http){
-
-//angular.module('gservice', [])
-    //.factory('gservice', function($rootScope, $http){
-
-        // Initialize Variables
-        // -------------------------------------------------------------
-        // Service our factory will return
+        // Tutorial from Google
         var googleMapService = {};
-
-        // Array of locations obtained from API calls
         var locations = [];
-        // Array of last Names
         var lastNames = [];
 
         // Variables we'll use to help us pan to the right spot
@@ -29,15 +20,10 @@ geotimeServices.factory('gservice', function($rootScope, $http){
         googleMapService.clickLong = 0;
 
         // Functions
-        // --------------------------------------------------------------
-        // Refresh the Map with new data. Function will take new latitude and longitude coordinates.
         googleMapService.refresh = function(latitude, longitude){
 
-            // Clears the holding array of locations
             locations = [];
             lastNames = [];
-
-            // Set the selected lat and long equal to the ones provided on the refresh() call
             selectedLat = latitude;
             selectedLong = longitude;
 
@@ -54,8 +40,6 @@ geotimeServices.factory('gservice', function($rootScope, $http){
             }).error(function(){});
         };
 
-        // Private Inner Functions
-        // --------------------------------------------------------------
         // Convert a JSON of users into map points
         var convertToMapPoints = function(response){
 
@@ -89,31 +73,7 @@ geotimeServices.factory('gservice', function($rootScope, $http){
         // location is now an array populated with records in Google Maps format
         return locations;
     };
-    //     var lastNamePicker = function(response){
-    //
-    //         var lastNames = [];
-    //         // Loop through all of the JSON entries provided in the response
-    //         for(var i= 0; i < response.length; i++) {
-    //             var user = response[i];
-    //
-    //             // Create popup windows for each record
-    //             var  contentString =
-    //                 '<p><b>firstName</b>: ' + user.firstName +
-    //                 '<p><b>lastName</b>: ' + user.lastName +
-    //                 '<br><b>Date</b>: ' + user.date +
-    //                 '<br><b>address</b>: ' + user.address +
-    //                 '</p>';
-    //
-    //             // Converts each of the JSON records into Google Maps Location format (Note [Lat, Lng] format).
-    //             lastNames.push({
-    //                 lastName: user.lastName
-    //         });
-    //     }
-    //     // location is now an array populated with records in Google Maps format
-    //     console.log(lastNames);
-    //     return lastNames;
-    // };
-// Initializes the map
+    
 var initialize = function(latitude, longitude) {
 
     // Uses the selected lat, long as starting point
